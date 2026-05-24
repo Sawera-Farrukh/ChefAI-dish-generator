@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Recipes with {{ query }}</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(to bottom right, #fff7ed, #fefce8);
+      min-height: 100vh;
+      padding: 2rem;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    h1 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #1f2937;
+    }
+
+    .highlight {
+      color: #ea580c;
+    }
+
+    .container {
+      max-width: 80rem;
+      margin: 0 auto;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 1rem;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 
+                  0 8px 10px -6px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card img {
+      height: 12rem;
+      width: 100%;
+      object-fit: contain;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .card h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #1f2937;
+    }
+
+    .card p {
+      font-size: 0.875rem;
+      color: #4b5563;
+      margin-bottom: 1rem;
+    }
+
+    .card button {
+      width: 100%;
+      background-color: #ea580c;
+      color: white;
+      padding: 0.65rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .card button:hover {
+      background-color: #c2410c;
+    }
+
+    .back-btn {
+      display: inline-block;
+      background-color: #1f2937;
+      color: white;
+      padding: 0.65rem 1.5rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color 0.2s;
+    }
+
+    .back-btn:hover {
+      background-color: #111827;
+    }
+
+    .center {
+      text-align: center;
+      margin-top: 2.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>
+    🍳 Recipes using: <span class="highlight">{{ query }}</span>
+  </h1>
+
+  <div class="container">
+    <div class="grid">
+
+      {% for dish in results %}
+      <div class="card">
+
+        <img src="{{ dish.image_url }}"
+             onerror="this.src='/static/images/placeholder.jpg'"
+             alt="{{ dish.recipe_name }}">
+
+        <h2>{{ dish.recipe_name }}</h2>
+
+        <p>
+          ⏱ {{ dish.total_time }} | 🍽 {{ dish.servings }} servings
+        </p>
+
+        <form action="/generate" method="POST">
+          <input type="hidden" name="dish_name" value="{{ dish.recipe_name }}">
+          <button type="submit">
+            View Full Recipe →
+          </button>
+        </form>
+
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+
+  <div class="center">
+    <a href="/" class="back-btn">🔙 Back</a>
+  </div>
+
+</body>
+</html>

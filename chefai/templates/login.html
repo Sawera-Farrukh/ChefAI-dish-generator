@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login - ChefAI</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(to bottom right, #ffedd5, #fefce8);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    .login-container {
+      background-color: white;
+      padding: 2.5rem;
+      border-radius: 1.5rem;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 
+                  0 8px 10px -6px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 28rem;
+    }
+
+    .title {
+      font-size: 1.875rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #1f2937;
+    }
+
+    .error {
+      background-color: #fee2e2;
+      color: #b91c1c;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid #d1d5db;
+      border-radius: 0.75rem;
+      font-size: 1rem;
+    }
+
+    .input:focus {
+      outline: none;
+      border-color: #fb923c;
+      box-shadow: 0 0 0 3px rgba(251, 146, 60, 0.2);
+    }
+
+    .submit-btn {
+      width: 100%;
+      background-color: #ea580c;
+      color: white;
+      padding: 0.85rem;
+      border-radius: 0.75rem;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .submit-btn:hover {
+      background-color: #c2410c;
+    }
+
+    .signup-link {
+      text-align: center;
+      margin-top: 1.5rem;
+      color: #4b5563;
+    }
+
+    .signup-link a {
+      color: #ea580c;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .signup-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <h1 class="title">🔐 Login</h1>
+
+    {% if error %}
+    <p class="error">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST">
+      <div class="form-group">
+        <input name="username" 
+               placeholder="Username" 
+               required 
+               class="input">
+      </div>
+
+      <div class="form-group">
+        <input type="password" 
+               name="password" 
+               placeholder="Password" 
+               required 
+               class="input">
+      </div>
+
+      <button type="submit" class="submit-btn">
+        Login
+      </button>
+    </form>
+
+    <p class="signup-link">
+      No account? <a href="/signup">Sign up</a>
+    </p>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>{{ recipe.recipe_name }}</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(to bottom right, #fff7ed, #fefce8);
+      min-height: 100vh;
+      padding: 1.5rem;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    .main-container {
+      max-width: 64rem;
+      margin: 0 auto;
+      background-color: white;
+      border-radius: 1.5rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      padding: 2rem;
+    }
+
+    .title {
+      font-size: 2.25rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #1f2937;
+    }
+
+    .image-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .recipe-image {
+      max-height: 20rem;
+      object-fit: contain;
+      border-radius: 1rem;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .info-card {
+      background-color: #fff7ed;
+      padding: 1rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      color: #c2410c;
+    }
+
+    .section-title {
+      font-size: 1.875rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #1f2937;
+    }
+
+    .ingredients-list,
+    .directions-list {
+      background-color: #fff7ed;
+      padding: 1.25rem;
+      border-radius: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .ingredients-list li,
+    .directions-list li {
+      margin-bottom: 0.75rem;
+      line-height: 1.6;
+    }
+
+    .ingredients-list {
+      list-style-type: disc;
+      padding-left: 1.25rem;
+    }
+
+    .directions-list {
+      list-style-type: decimal;
+      padding-left: 1.25rem;
+    }
+
+    .nutrition-box {
+      background-color: #f0fdf4;
+      padding: 1.25rem;
+      border-radius: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .health-box {
+      background-color: #fef2f2;
+      padding: 1.25rem;
+      border-radius: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .back-btn {
+      display: inline-block;
+      background-color: #1f2937;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color 0.2s;
+    }
+
+    .back-btn:hover {
+      background-color: #111827;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="main-container">
+
+    <h1 class="title">{{ recipe.recipe_name }}</h1>
+
+    <div class="image-container">
+      <img src="{{ recipe.image_url }}"
+           onerror="this.src='/static/images/placeholder.jpg'"
+           alt="{{ recipe.recipe_name }}"
+           class="recipe-image">
+    </div>
+
+    <!-- Time & Servings Info -->
+    <div class="info-grid">
+      <div class="info-card">⏱ Prep: {{ recipe.prep_time }}</div>
+      <div class="info-card">🔥 Cook: {{ recipe.cook_time }}</div>
+      <div class="info-card">⌛ Total: {{ recipe.total_time }}</div>
+      <div class="info-card">🍽 Servings: {{ recipe.servings }}</div>
+    </div>
+
+    <!-- Ingredients -->
+    <div>
+      <h2 class="section-title">🧄 Ingredients</h2>
+      <ul class="ingredients-list">
+        {% for ing in recipe.ingredients %}
+          <li>{{ ing }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <!-- Directions -->
+    <div>
+      <h2 class="section-title">👨‍🍳 Directions</h2>
+      <ol class="directions-list">
+        {% for step in recipe.directions %}
+          <li>{{ step }}</li>
+        {% endfor %}
+      </ol>
+    </div>
+
+    <!-- Nutrition -->
+    <div class="nutrition-box">
+      <h2 class="section-title" style="font-size: 1.5rem; margin-bottom: 0.5rem;">🥗 Nutrition</h2>
+      <p>{{ recipe.nutrition }}</p>
+    </div>
+
+    <!-- Health Recommendation -->
+    <div class="health-box">
+      <h2 class="section-title" style="font-size: 1.5rem; margin-bottom: 0.5rem;">⚠ Health Recommendation</h2>
+      <p>{{ recipe.health_recommendation }}</p>
+    </div>
+
+    <!-- Back Button -->
+    <div class="text-center">
+      <a href="/" class="back-btn">🔙 Back Home</a>
+    </div>
+
+  </div>
+
+</body>
+</html>

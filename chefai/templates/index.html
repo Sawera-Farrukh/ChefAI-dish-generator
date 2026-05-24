@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ChefAI - Home</title>
+  
+  <!-- Custom CSS -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #f9fafb;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    /* ================= NAVBAR ================= */
+    nav {
+      background-color: white;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      width: 100%;
+      z-index: 50;
+    }
+
+    .nav-container {
+      max-width: 80rem;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #ea580c;
+    }
+
+    .nav-buttons a {
+      padding: 0.5rem 1rem;
+      border-radius: 0.75rem;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    /* ================= SPACER ================= */
+    .spacer {
+      padding-top: 6rem;
+    }
+
+    /* ================= HERO SECTION ================= */
+    .hero {
+      text-align: center;
+      padding: 5rem 0;
+      background: linear-gradient(to right, #ffedd5, #fefce8);
+    }
+
+    .hero h2 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: #1f2937;
+    }
+
+    .hero p {
+      font-size: 1.125rem;
+      color: #4b5563;
+      margin-bottom: 2rem;
+    }
+
+    .hero-btn {
+      background-color: #ea580c;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 1rem;
+      font-size: 1.125rem;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 10px 15px -3px rgba(234, 88, 12, 0.3);
+      transition: all 0.2s;
+    }
+
+    .hero-btn:hover {
+      background-color: #c2410c;
+    }
+
+    /* ================= SEARCH FORM SECTION ================= */
+    .form-section {
+      padding: 4rem 0;
+    }
+
+    .form-container {
+      max-width: 42rem;
+      margin: 0 auto;
+      background-color: white;
+      padding: 2.5rem;
+      border-radius: 1.5rem;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-container form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #374151;
+    }
+
+    .input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid #d1d5db;
+      border-radius: 0.75rem;
+      font-size: 1rem;
+    }
+
+    .or-divider {
+      text-align: center;
+      color: #9ca3af;
+      font-weight: 700;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background-color: #ea580c;
+      color: white;
+      padding: 0.75rem;
+      border-radius: 0.75rem;
+      font-weight: 700;
+      font-size: 1.125rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+    }
+
+    .submit-btn:hover {
+      background-color: #c2410c;
+    }
+
+    /* Hover effects for links */
+    .nav-link {
+      transition: all 0.2s;
+    }
+
+    .nav-link:hover {
+      background-color: #fef3c7;
+    }
+
+    .logout-btn {
+      background-color: #ef4444;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 0.75rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .logout-btn:hover {
+      background-color: #dc2626;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<nav>
+  <div class="nav-container">
+    
+    <h1 class="logo">👨‍🍳 ChefAI</h1>
+
+    <div class="nav-buttons space-x-4">
+      
+      {% if session.get("user") %}
+        
+        <span class="font-semibold text-gray-700">
+          Welcome, {{ session.get("user") }}
+        </span>
+
+        <a href="/logout" class="logout-btn">
+           Logout
+        </a>
+
+      {% else %}
+
+        <a href="/login" class="nav-link px-4 py-2 border border-orange-500 text-orange-600 rounded-xl">
+           Login
+        </a>
+
+        <a href="/signup" class="bg-orange-500 text-white px-4 py-2 rounded-xl hover:bg-orange-600">
+           Sign Up
+        </a>
+
+      {% endif %}
+
+    </div>
+  </div>
+</nav>
+
+<!-- Spacer -->
+<div class="spacer"></div>
+
+
+<!-- ================= HERO SECTION ================= -->
+<section class="hero">
+  <h2>Discover Delicious Recipes Instantly 🍽️</h2>
+
+  <p>Search by dish name or ingredients and cook like a pro!</p>
+
+  <a href="#recipeForm" class="hero-btn">
+     Get Started
+  </a>
+</section>
+
+
+<!-- ================= SEARCH FORM ================= -->
+<section id="recipeForm" class="form-section">
+  <div class="form-container">
+
+    <form action="/generate" method="POST">
+      
+      <div>
+        <label class="label">Dish Name</label>
+        <input name="dish_name" 
+               placeholder="Enter dish name" 
+               class="input">
+      </div>
+
+      <div class="or-divider">OR</div>
+
+      <div>
+        <label class="label">Ingredients</label>
+        <input name="ingredients" 
+               placeholder="Enter ingredients (comma separated)" 
+               class="input">
+      </div>
+
+      <button type="submit" class="submit-btn">
+        Generate Recipe
+      </button>
+
+    </form>
+
+  </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,160 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #fff5ec, #f1f7ff);
+  color: #2d2d2d;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero {
+  padding: 60px 20px 30px;
+  text-align: center;
+}
+
+.hero.small {
+  padding: 40px 20px 20px;
+}
+
+.hero h1 {
+  font-size: 42px;
+  margin: 0;
+}
+
+.hero p {
+  opacity: 0.8;
+}
+
+.container {
+  width: 100%;
+  max-width: 980px;
+  margin: auto;
+  padding: 20px;
+}
+
+.glass {
+  backdrop-filter: blur(10px);
+}
+
+.card {
+  background: white;
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  animation: fadeIn 0.6s ease;
+}
+
+.form-card label {
+  font-weight: 600;
+  display: block;
+  margin-top: 12px;
+}
+
+.form-card input,
+.form-card textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  margin-top: 6px;
+  font-family: inherit;
+}
+
+.form-card textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.primary-btn {
+  margin-top: 18px;
+  width: 100%;
+  padding: 12px 18px;
+  border-radius: 14px;
+  border: none;
+  background: linear-gradient(135deg, #ff914d, #ff7a1f);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.primary-btn:hover {
+  filter: brightness(1.05);
+}
+
+.secondary-btn, .ghost-btn {
+  text-decoration: none;
+  padding: 10px 16px;
+  border-radius: 12px;
+  margin-right: 10px;
+}
+
+.secondary-btn {
+  background: #f3f3f3;
+  color: #333;
+}
+
+.ghost-btn {
+  background: transparent;
+  border: 1px dashed #ccc;
+  cursor: pointer;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.feature {
+  background: white;
+  padding: 16px;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.05);
+}
+
+.image-box {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.image-box img {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 18px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.2);
+}
+
+.recipe-box {
+  line-height: 1.7;
+}
+
+.actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer {
+  text-align: center;
+  padding: 18px;
+  opacity: 0.7;
+  margin-top: auto;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
